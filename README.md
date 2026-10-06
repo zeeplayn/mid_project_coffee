@@ -33,4 +33,5 @@ Individual contribution
 - Member 3:contact.html (form), CSS for form, media queries (tablet + mobile). 
 
 Published website
-Link: lopaf.netlify.app
+Link: 
+lopaf.netlify.app
