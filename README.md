@@ -30,7 +30,7 @@ HTML5, CSS3, Bootstrap 5, Google Fonts, GitHub Pages
 Individual contribution
 - Member 1:index.html, about.html, header, footer, hero section, CSS variables and base styles
 - Member 2:menu.html (table + dessert cards), gallery.html, CSS for cards, grid, table and gallery
-- Member 3:contact.html (form), CSS for form, media queries (tablet + mobile), README, publishing on GitHub Pages
+- Member 3:contact.html (form), CSS for form, media queries (tablet + mobile). 
 
 Published website
 Link: lopaf.netlify.app
