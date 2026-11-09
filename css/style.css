@@ -79,7 +79,7 @@ h1, h2 {
 
 .hero {
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                    url("https://picsum.photos/seed/coffeehero/1400/600");
+                    url("https://i.pinimg.com/1200x/2b/5f/43/2b5f43b39083af8dffc4b6f0dcebc4c8.jpg");
   background-size: cover;
   background-position: center;
   min-height: 450px;
@@ -138,13 +138,13 @@ h1, h2 {
   gap: 20px;
 }
 
-.dessert-grid {
+.menu-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 20px;
 }
 
-.dessert-grid > .card-item {
+.menu-grid > .card-item {
   min-width: 0;
 }
 
@@ -161,7 +161,7 @@ h1, h2 {
   border-radius: 8px;
 }
 
-.dessert-grid .card-item img {
+.menu-grid .card-item img {
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
@@ -170,7 +170,7 @@ h1, h2 {
   background-color: #fff3e6;
 }
 
-.dessert-grid .card-item:nth-child(even) {
+.menu-grid .card-item:nth-child(even) {
   background-color: #efe0d0;
 }
 
@@ -287,7 +287,7 @@ h1, h2 {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .dessert-grid {
+  .menu-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -314,11 +314,33 @@ h1, h2 {
   }
 
   .popular-grid,
-  .dessert-grid {
+  .menu-grid {
     grid-template-columns: 1fr;   /* items stack */
   }
 
   .contact-form {
     padding: 15px;
   }
+}
+
+.form-msg {
+  min-height: 18px;
+  font-size: 0.85rem;
+}
+
+.msg-ok {
+  color: green;
+}
+
+.msg-error {
+  color: red;
+}
+
+.strength-bar {
+  height: 8px;
+}
+
+#strength-text {
+  min-height: 18px;
+  font-weight: 600;
 }
