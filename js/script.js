@@ -131,7 +131,6 @@ $(document).ready(function () {
       $('#form-alert').html('<div class="alert alert-success">Welcome, ' +
         $('<span>').text(name).html() + '! You are registered.</div>');
 
-      // clear the form
       this.reset();
       $('#register-form .form-control, #register-form input').removeClass('is-valid is-invalid');
       $('.form-msg').text('');
@@ -139,4 +138,97 @@ $(document).ready(function () {
     } else {
       $('#form-alert').html('<div class="alert alert-danger">Please fix the errors below and try again.</div>');
     }
+  });
+
+  var currentCategory = 'all';
+
+  function filterMenu() {
+    var text = $('#search-input').val().toLowerCase().trim();
+    var found = 0;
+
+    $('.menu-grid .card-item').each(function () {
+      var $card = $(this);
+      var name = $card.find('h3').text().toLowerCase();
+      var desc = $card.find('.desc').text().toLowerCase();
+      var category = $card.data('category');
+
+      var textMatch = name.indexOf(text) !== -1  desc.indexOf(text) !== -1;
+      var categoryMatch = (currentCategory === 'all'  category === currentCategory);
+
+      if (textMatch && categoryMatch) {
+        $card.show();
+        found++;
+      } else {
+        $card.hide();
+      }
+    });
+
+    if (found === 0) {
+      $('#no-results').show();
+    } else {
+      $('#no-results').hide();
+    }
+  }
+
+  $('#search-input').on('input', filterMenu);
+
+  $('.filter-btn').on('click', function () {
+    $('.filter-btn').removeClass('active');
+    $(this).addClass('active');
+    currentCategory = $(this).data('filter');
+    filterMenu();
+  });
+
+
+  var $galleryImages = $('.gallery-item img');
+  var currentImage = 0;
+
+  function showImage(index) {
+    if (index < 0) index = $galleryImages.length - 1;
+    if (index >= $galleryImages.length) index = 0;
+    currentImage = index;
+
+    var $img = $galleryImages.eq(index);
+
+    $('#lb-img').fadeOut(200, function () {
+      $(this).attr('src', $img.attr('src')).attr('alt', $img.attr('alt'));
+      $('#lb-caption').text($img.attr('alt') + ' (' + (index + 1) + '/' + $galleryImages.length + ')');
+      $(this).fadeIn(300);
+    });
+  }
+
+  function openLightbox(index) {
+    currentImage = index;
+    var $img = $galleryImages.eq(index);
+
+    $('#lb-img').attr('src', $img.attr('src')).attr('alt', $img.attr('alt'));
+    $('#lb-caption').text($img.attr('alt') + ' (' + (index + 1) + '/' + $galleryImages.length + ')');
+
+    $('#lightbox').css('display', 'flex').hide().fadeIn(300);
+    $('.lb-content').css('margin-top', '-40px').animate({ 'margin-top': '0px' }, 300);
+  }
+
+  function closeLightbox() {
+    $('#lightbox').fadeOut(300);
+  }
+
+  $galleryImages.on('click', function () {
+    openLightbox($galleryImages.index(this));
+  });
+
+  $('#lb-next').on('click', function () { showImage(currentImage + 1); });
+  $('#lb-prev').on('click', function () { showImage(currentImage - 1); });
+  $('#lb-close').on('click', closeLightbox);
+
+  $('#lightbox').on('click', function (e) {
+    if (e.target === this) {
+      closeLightbox();
+    }
+  });
+
+  $(document).on('keydown', function (e) {
+    if (!$('#lightbox').is(':visible')) return;
+    if (e.key === 'ArrowRight') showImage(currentImage + 1);
+    if (e.key === 'ArrowLeft') showImage(currentImage - 1);
+    if (e.key === 'Escape') closeLightbox();
   });

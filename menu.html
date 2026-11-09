@@ -19,6 +19,8 @@
         <li><a href="about.html">About</a></li>
         <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="manage.html">Admin</a></li>
       </ul>
     </nav>
   </header>
@@ -52,30 +54,66 @@
     </section>
 
     <section class="container mb-5">
-      <h2 class="mb-3">Desserts</h2>
-      <div class="dessert-grid">
-        <div class="card-item">
+      <h2 class="mb-3">Find your favorite</h2>
+
+      <!-- search and filter -->
+      <div class="search-box mb-3">
+        <input type="text" id="search-input" class="form-control" placeholder="Search drinks and desserts...">
+      </div>
+
+      <div class="filter-buttons mb-4">
+        <button class="btn btn-outline-brown filter-btn active" data-filter="all">All</button>
+        <button class="btn btn-outline-brown filter-btn" data-filter="Coffee">Coffee</button>
+        <button class="btn btn-outline-brown filter-btn" data-filter="Dessert">Desserts</button>
+      </div>
+
+      <div class="menu-grid">
+        <div class="card-item" data-category="Coffee">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbamkRoI7-nP_ZPFkZVw8aXYY3zrSGukesc3X9MZZzRpyNCkVHaA32nEk&s=10" alt="Espresso" loading="lazy">
+          <h3>Espresso</h3>
+          <p class="desc">Small but powerful.</p>
+          <p class="price">600 &#8376;</p>
+        </div>
+        <div class="card-item" data-category="Coffee">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR43zeoElNo9A8jVD-iv0bL43PLpVgjtBWO6aNqBJ2Y9ss50oJkRuqHiCY&s=10" alt="Latte" loading="lazy">
+          <h3>Latte</h3>
+          <p class="desc">Soft and creamy.</p>
+          <p class="price">900 &#8376;</p>
+        </div>
+        <div class="card-item" data-category="Coffee">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGEb1KoTFJAcqaZmnR30arnKca21O8viuVKg8qdYq3LQ&s=10" alt="Cappuccino" loading="lazy">
+          <h3>Cappuccino</h3>
+          <p class="desc">Strong with milk foam.</p>
+          <p class="price">900 &#8376;</p>
+        </div>
+        <div class="card-item" data-category="Dessert">
           <span class="badge-new">New</span>
           <img src="https://www.jocooks.com/wp-content/uploads/2022/10/cheesecake-hero-shot.jpg" alt="Cheesecake" loading="lazy">
           <h3>Cheesecake</h3>
-          <p>1500 &#8376;</p>
+          <p class="desc">Classic and creamy.</p>
+          <p class="price">1500 &#8376;</p>
         </div>
-        <div class="card-item">
+        <div class="card-item" data-category="Dessert">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ-2M6i4w2c0PrqBVwwKzAPUv_uwvgYTRQv0IUpqV5KjV7Dq2x4PLoEdY9&s=10" alt="Croissant" loading="lazy">
           <h3>Croissant</h3>
-          <p>800 &#8376;</p>
+          <p class="desc">Fresh and crispy.</p>
+          <p class="price">800 &#8376;</p>
         </div>
-        <div class="card-item">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfGGzmFEnmGXekcMBy685ba6xs_mJWXCBaUEgVr7uH6Z4A9Gs_47Goene3&s=10" alt="Cookie" loading="lazy">
+        <div class="card-item" data-category="Dessert">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfGGzmFEnmGXekcMBy685ba6xs_mJWXCBaUEgVr7uH6Z4A9Gs_47Goene3&s=10" alt="Chocolate cookie" loading="lazy">
           <h3>Chocolate cookie</h3>
-          <p>600 &#8376;</p>
+          <p class="desc">With chocolate pieces.</p>
+          <p class="price">600 &#8376;</p>
         </div>
-        <div class="card-item">
+        <div class="card-item" data-category="Dessert">
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdtgAsC8jnp7ocOxG_dhvTMqxlpkr2omzeWo4ESmTwURPpQYaML09tr_WO&s=10" alt="Brownie" loading="lazy">
           <h3>Brownie</h3>
-          <p>900 &#8376;</p>
+          <p class="desc">Very chocolate.</p>
+          <p class="price">900 &#8376;</p>
         </div>
       </div>
+
+      <p id="no-results" class="text-center mt-4">Nothing found. Try another word.</p>
     </section>
   </main>
 
@@ -100,9 +138,13 @@
           </p>
         </div>
       </div>
-      <p class="copyright text-center"> 2026 Bean There Coffee. All rights reserved.</p>
+      <p class="copyright text-center">&copy; 2026 Bean There Coffee. All rights reserved.</p>
     </div>
   </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
 
 </body>
 </html>
