@@ -17,7 +17,8 @@ body {
   color: var(--dark-brown);
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: var(--title-font);
   font-weight: 400;
 }
@@ -28,7 +29,7 @@ h1, h2 {
   align-items: center;
   padding: 15px 40px;
   background-color: var(--dark-brown);
-  position: sticky;      
+  position: sticky;
   top: 0;
   z-index: 100;
 }
@@ -78,8 +79,8 @@ h1, h2 {
 }
 
 .hero {
-  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                    url("https://i.pinimg.com/1200x/2b/5f/43/2b5f43b39083af8dffc4b6f0dcebc4c8.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://i.pinimg.com/1200x/2b/5f/43/2b5f43b39083af8dffc4b6f0dcebc4c8.jpg");
   background-size: cover;
   background-position: center;
   min-height: 450px;
@@ -144,12 +145,12 @@ h1, h2 {
   gap: 20px;
 }
 
-.menu-grid > .card-item {
+.menu-grid>.card-item {
   min-width: 0;
 }
 
 .card-item {
-  position: relative;     
+  position: relative;
   background-color: white;
   border-radius: 10px;
   padding: 10px;
@@ -175,7 +176,7 @@ h1, h2 {
 }
 
 .badge-new {
-  position: absolute;    
+  position: absolute;
   top: 15px;
   right: 15px;
   background-color: red;
@@ -294,7 +295,7 @@ h1, h2 {
 
 @media (max-width: 576px) {
   .site-header {
-    flex-direction: column;    
+    flex-direction: column;
     gap: 10px;
   }
 
@@ -314,7 +315,7 @@ h1, h2 {
 
   .popular-grid,
   .menu-grid {
-    grid-template-columns: 1fr;  
+    grid-template-columns: 1fr;
   }
 
   .contact-form {
@@ -436,4 +437,26 @@ h1, h2 {
 .lb-arrow:focus,
 .lb-close:hover {
   color: #e6b17e;
+}
+
+#product-table td:last-child {
+  white-space: nowrap;
+}
+
+
+@media (max-width: 768px) {
+  .lb-arrow {
+    padding: 0 8px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .lb-content {
+    max-width: 70%;
+  }
+
+  .filter-buttons .btn {
+    flex: 1 1 40%;
+  }
 }
