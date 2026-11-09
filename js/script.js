@@ -1,8 +1,6 @@
 $(document).ready(function () {
 
-
   var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
 
   function showMsg(input, text, ok) {
     var $input = $(input);
@@ -62,8 +60,7 @@ $(document).ready(function () {
     return true;
   }
 
- 
- function updateStrength() {
+  function updateStrength() {
     var value = $('#reg-password').val();
     var score = 0;
 
@@ -105,7 +102,6 @@ $(document).ready(function () {
     return true;
   }
 
-
   $('#reg-name').on('input blur', checkName);
   $('#reg-email').on('input blur', checkEmail);
   $('#reg-password').on('input', function () {
@@ -117,9 +113,8 @@ $(document).ready(function () {
   });
   $('#reg-confirm').on('input blur', checkConfirm);
 
-
   $('#register-form').on('submit', function (e) {
-    e.preventDefault(); 
+    e.preventDefault();
 
     var nameOk = checkName();
     var emailOk = checkEmail();
@@ -152,8 +147,8 @@ $(document).ready(function () {
       var desc = $card.find('.desc').text().toLowerCase();
       var category = $card.data('category');
 
-      var textMatch = name.indexOf(text) !== -1  desc.indexOf(text) !== -1;
-      var categoryMatch = (currentCategory === 'all'  category === currentCategory);
+      var textMatch = name.indexOf(text) !== -1 || desc.indexOf(text) !== -1;
+      var categoryMatch = (currentCategory === 'all' || category === currentCategory);
 
       if (textMatch && categoryMatch) {
         $card.show();
@@ -178,7 +173,6 @@ $(document).ready(function () {
     currentCategory = $(this).data('filter');
     filterMenu();
   });
-
 
   var $galleryImages = $('.gallery-item img');
   var currentImage = 0;
@@ -232,3 +226,116 @@ $(document).ready(function () {
     if (e.key === 'ArrowLeft') showImage(currentImage - 1);
     if (e.key === 'Escape') closeLightbox();
   });
+
+  if ($('#product-table').length) {
+
+    var products = [
+      { id: 1, name: 'Espresso', category: 'Coffee', price: 600 },
+      { id: 2, name: 'Latte', category: 'Coffee', price: 900 },
+      { id: 3, name: 'Lemonade', category: 'Cold', price: 800 },
+      { id: 4, name: 'Cheesecake', category: 'Dessert', price: 1500 },
+      { id: 5, name: 'Croissant', category: 'Dessert', price: 800 }
+    ];
+    var nextId = 6;
+    var productModal = new bootstrap.Modal(document.getElementById('product-modal'));
+
+    function renderTable() {
+      var $body = $('#product-body');
+      $body.empty();
+
+      if (products.length === 0) {
+        $body.append('<tr><td colspan="5">No products yet. Click "Add product".</td></tr>');
+        return;
+      }
+
+      $.each(products, function (i, p) {
+        var $row = $('<tr>').attr('data-id', p.id);
+        $row.append($('<td>').text(p.id));
+        $row.append($('<td>').text(p.name));
+        $row.append($('<td>').text(p.category));
+        $row.append($('<td>').text(p.price));
+
+        var $edit = $('<button>').addClass('btn btn-sm btn-brown edit-btn').text('Edit');
+        var $del = $('<button>').addClass('btn btn-sm btn-danger delete-btn').text('Delete');
+        $row.append($('<td>').append($edit, ' ', $del));
+
+        $body.append($row);
+      });
+    }
+
+    function showCrudAlert(text, type) {
+      $('#crud-alert').html('<div class="alert alert-' + type + '">' + text + '</div>');
+      setTimeout(function () {
+        $('#crud-alert .alert').fadeOut(400);
+      }, 3000);
+    }
+
+    $('#add-btn').on('click', function () {
+      $('#modal-title').text('Add product');
+      $('#product-form')[0].reset();
+      $('#product-id').val('');
+      $('#modal-error').text('');
+      productModal.show();
+    });
+
+    $('#product-body').on('click', '.edit-btn', function () {
+      var id = $(this).closest('tr').data('id');
+      var product = products.find(function (p) { return p.id === id; });
+
+      $('#modal-title').text('Edit product');
+      $('#product-id').val(product.id);
+      $('#product-name').val(product.name);
+      $('#product-category').val(product.category);
+      $('#product-price').val(product.price);
+      $('#modal-error').text('');
+      productModal.show();
+    });
+
+    $('#product-form').on('submit', function (e) {
+      e.preventDefault();
+
+      var id = $('#product-id').val();
+      var name = $('#product-name').val().trim();
+      var category = $('#product-category').val();
+      var price = Number($('#product-price').val());
+
+      if (name === '') {
+        $('#modal-error').text('Please enter a name');
+        return;
+      }
+      if (!price || price <= 0) {
+        $('#modal-error').text('Price must be more than 0');
+        return;
+      }
+
+      if (id === '') {
+        products.push({ id: nextId, name: name, category: category, price: price });
+        nextId++;
+        showCrudAlert('Product added!', 'success');
+      } else {
+        var product = products.find(function (p) { return p.id === Number(id); });
+        product.name = name;
+        product.category = category;
+        product.price = price;
+        showCrudAlert('Product updated!', 'info');
+      }
+
+      productModal.hide();
+      renderTable();
+    });
+
+    $('#product-body').on('click', '.delete-btn', function () {
+      var id = $(this).closest('tr').data('id');
+      var product = products.find(function (p) { return p.id === id; });
+
+      if (confirm('Delete "' + product.name + '"?')) {
+        products = products.filter(function (p) { return p.id !== id; });
+        renderTable();
+        showCrudAlert('Product deleted.', 'danger');
+      }
+    });
+
+    renderTable();
+  }
+
+});
